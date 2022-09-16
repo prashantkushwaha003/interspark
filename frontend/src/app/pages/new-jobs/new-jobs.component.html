@@ -1,0 +1,89 @@
+<div class="">
+    <h4 class="mb-3" routerLink="/"><i class="bi bi-arrow-left-circle"></i> Back</h4>
+</div>
+
+
+<form  #myForm="ngForm" (ngSubmit)="jobDetail ? update() : onSubmit()">
+    <div class="row">
+        <div class="col-md-12 mb-3">
+            <label for="job_title">Job Title</label>
+            <input type="text" class="form-control" id="job_title"
+                required
+                [(ngModel)]="form.job_title" name="job_title"
+                #job_title="ngModel">
+            <div [hidden]="job_title.valid || job_title.pristine"
+                class="alert alert-danger">
+                Job title required
+            </div>
+        </div>
+       
+        <div class="col-md-6 mb-3">
+            <label for="job_start_date">Start Date</label>
+            <input type="date" class="form-control" id="job_start_date"
+                required
+                value="{{form.job_start_date}}"
+                [(ngModel)]="form.job_start_date" name="job_start_date"
+                #job_start_date="ngModel">
+            <div [hidden]="job_start_date.valid || job_start_date.pristine"
+                class="alert alert-danger">
+                Job start date required
+            </div>
+        </div>
+        <div class="col-md-6 mb-3">
+            <label for="job_close_date">Close Date</label>
+            <input type="date" class="form-control" id="job_close_date"
+                required
+                min="{{form.job_close_date}}"
+                [(ngModel)]="form.job_close_date" name="job_close_date"
+                #job_close_date="ngModel">
+            <div [hidden]="job_close_date.valid || job_close_date.pristine"
+                class="alert alert-danger">
+                Job close date required
+            </div>
+        </div>
+        <div class="col-md-6 mb-3">
+            <label for="number_of_openings">Number Of Openings</label>
+            <input type="number" class="form-control" id="number_of_openings"
+                required
+                min="1"
+                [(ngModel)]="form.number_of_openings" name="number_of_openings"
+                #number_of_openings="ngModel">
+            <div [hidden]="number_of_openings.valid || number_of_openings.pristine"
+                class="alert alert-danger">
+                Number of openings required
+            </div>
+        </div>
+        <div class="col-md-6 mb-3">
+            <label for="job_number">Job Number</label>
+            <input type="text" class="form-control" id="job_number"
+                required
+                [(ngModel)]="form.job_number" name="job_number"
+                #job_number="ngModel">
+            <div [hidden]="job_number.valid || job_number.pristine"
+                class="alert alert-danger">
+                Job Number required
+            </div>
+        </div>
+        <div class="col-md-12 mb-3">
+            <label for="job_notes">Job Notes</label>
+            <textarea type="text" class="form-control" id="job_notes"
+                required
+                [(ngModel)]="form.job_notes" name="job_notes"
+                #job_notes="ngModel">
+            </textarea>    
+            <div [hidden]="job_notes.valid || job_notes.pristine"
+                class="alert alert-danger">
+                Job Note required
+            </div>
+        </div>
+    </div>
+    <div class="form-check form-switch mb-3">
+        <input class="form-check-input" name="experience_required" type="checkbox" role="switch" [checked]="form.experience_required" [(ngModel)]="form.experience_required"  id="experience_required">
+        <label class="form-check-label" for="flexSwitchCheckDefault">Experience Required</label>
+      </div>
+
+    <button class="btn btn-primary float-start" type="submit" [disabled]="!myForm.valid">{{jobDetail ? 'Update' : 'Submit'}}</button>
+
+   
+    
+</form>

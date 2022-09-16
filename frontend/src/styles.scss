@@ -1,0 +1,20 @@
+/* change the colors */
+$primary: rebeccapurple;
+$danger: #e90a0a;
+$success: rgb(12, 175, 12);
+$warning: orange;
+$info: aqua;
+
+$body-bg: #f3f3f0;
+
+@import "bootstrap";
+@import "bootstrap-icons/font/bootstrap-icons.css";
+
+
+body {
+    padding-top: 50px;
+}
+
+section {
+    min-height: 90vh;
+}
