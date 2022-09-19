@@ -1,8 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, Observable, throwError } from 'rxjs';
+import { catchError, map, Observable, throwError } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Job } from '../models/model';
+import { HttpService } from './http.service';
 
 
 @Injectable({
@@ -10,31 +11,25 @@ import { Job } from '../models/model';
 })
 export class ApiService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private httpService: HttpService) { }
 
-  getJobs() {
-    return this.http.get(environment.base_href + '/jobs');
+  getAllJobs(): Observable<Job[]> {
+    return this.httpService.getHttp('/jobs')
+      .pipe(map(data => data as Job[]));
   }
-  getJobById(id: any) {
-    return this.http.get(environment.base_href + `/jobs/${id}`);
+  getJobById(id: any): Observable<Job> {
+    return this.httpService.getHttp(`/jobs/${id}`);
   }
-
-  postJob(data: Job) : Observable<any> {
-    const headers = { 'content-type': 'application/json'}  
-    const body=JSON.stringify(data);
-    console.log(body)
-    return this.http.post(environment.base_href + '/jobs', body,{'headers':headers})
+  newJob( data: Job) : Observable<Job> {
+    return this.httpService.postHttp('/jobs', data);
   }
 
-  updateJob(data: Job) : Observable<any> {
-    const headers = { 'content-type': 'application/json'}  
-    const body=JSON.stringify(data);
-    console.log(body)
-    return this.http.put(environment.base_href + `/jobs/${data.id}`, body,{'headers':headers})
+  updateJob(id: any,data: Job) : Observable<any> {
+    return this.httpService.updateHttp(`/jobs/${id}`, data);
   }
 
-  deleteJob(id :any) : Observable<any> {
-    const headers = { 'content-type': 'application/json'}
-    return this.http.delete(environment.base_href + `/jobs/${id}`,)
+  deleteJob(id: any) : Observable<any> {
+    return this.httpService.deleteHttp(`/jobs/${id}`);
   }
+
 }

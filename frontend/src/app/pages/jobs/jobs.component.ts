@@ -16,7 +16,7 @@ export class JobsComponent implements OnInit {
   }
 
   getJobsList() {
-    this.apiService.getJobs().subscribe((data: any) => {
+    this.apiService.getAllJobs().subscribe((data: any) => {
       this.jobList = data;
     })
   }

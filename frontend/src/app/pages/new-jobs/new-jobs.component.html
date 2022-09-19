@@ -2,7 +2,7 @@
     <h4 class="mb-3" routerLink="/"><i class="bi bi-arrow-left-circle"></i> Back</h4>
 </div>
 
-
+<!-- 
 <form  #myForm="ngForm" (ngSubmit)="jobDetail ? update() : onSubmit()">
     <div class="row">
         <div class="col-md-12 mb-3">
@@ -80,6 +80,101 @@
     <div class="form-check form-switch mb-3">
         <input class="form-check-input" name="experience_required" type="checkbox" role="switch" [checked]="form.experience_required" [(ngModel)]="form.experience_required"  id="experience_required">
         <label class="form-check-label" for="flexSwitchCheckDefault">Experience Required</label>
+      </div>
+
+    <button class="btn btn-primary float-start" type="submit" [disabled]="!myForm.valid">{{jobDetail ? 'Update' : 'Submit'}}</button>
+
+   
+    
+</form> -->
+
+
+
+<form [formGroup]="myForm" (ngSubmit)="jobDetail ? update() : onSubmit()">
+    <div class="row">
+        <div class="col-md-12 mb-3">
+            <label for="job_title">Job Title</label>
+            <input type="text" class="form-control" id="job_title"
+                required
+                name="job_title"
+                formControlName="job_title"
+                >
+            <div class="alert alert-danger"
+             *ngIf="myForm.get('job_title').invalid && (myForm.get('job_title').dirty || myForm.get('job_title').touched)">
+                Job title required
+            </div>
+        </div>
+       
+        <div class="col-md-6 mb-3">
+            <label for="job_start_date">Start Date</label>
+            <input type="date" class="form-control" id="job_start_date"
+                required
+                value="{{myForm.get('job_start_date')}}"
+                formControlName="job_start_date" 
+                name="job_start_date"
+                >
+            <div class="alert alert-danger"
+             *ngIf="myForm.get('job_start_date').invalid && (myForm.get('job_start_date').dirty || myForm.get('job_start_date').touched)">
+                Job start date required
+            </div>
+        </div>
+        <div class="col-md-6 mb-3">
+            <label for="job_close_date">Close Date</label>
+            <input type="date" class="form-control" id="job_close_date"
+                required 
+                name="job_close_date"
+                formControlName="job_close_date" 
+                min="{{myForm.get('job_start_date').value}}"
+                >
+            <div class="alert alert-danger"
+             *ngIf="myForm.get('job_close_date').invalid && (myForm.get('job_close_date').dirty || myForm.get('job_close_date').touched)">
+                Job close date required
+            </div>
+        </div>
+        <div class="col-md-6 mb-3">
+            <label for="number_of_openings">Number Of Openings</label>
+            <input type="number" class="form-control" id="number_of_openings"
+                required
+                min="1"
+                name="number_of_openings"
+                formControlName="number_of_openings" >
+            <div class="alert alert-danger"
+             *ngIf="myForm.get('number_of_openings').invalid && (myForm.get('number_of_openings').dirty || myForm.get('number_of_openings').touched)">
+                Number of openings required
+            </div>
+        </div>
+        <div class="col-md-6 mb-3">
+            <label for="job_number">Job Number</label>
+            <input type="text" class="form-control" id="job_number"
+                required
+                name="job_number"
+                formControlName="job_number" >
+            <div class="alert alert-danger"
+             *ngIf="myForm.get('job_number').invalid && (myForm.get('job_number').dirty || myForm.get('job_number').touched)">
+                Job Number required
+            </div>
+        </div>
+        <div class="col-md-12 mb-3">
+            <label for="job_notes">Job Notes</label>
+            <textarea type="text" class="form-control" id="job_notes"
+                required
+                name="job_notes"
+                formControlName="job_notes" >
+            </textarea>    
+            <div class="alert alert-danger"
+             *ngIf="myForm.get('job_notes').invalid && (myForm.get('job_notes').dirty || myForm.get('job_notes').touched)">
+                Job Note required
+            </div>
+        </div>
+    </div>
+    <div class="form-check form-switch mb-3">
+        <input 
+        class="form-check-input" 
+        name="experience_required" type="checkbox" role="switch"
+        [checked]="myForm.get('experience_required').value" 
+        formControlName="experience_required" 
+        id="experience_required">
+        <label class="form-check-label" for="flexSwitchCheckDefault">Experience Required {{myForm.get('experience_required').value}}</label>
       </div>
 
     <button class="btn btn-primary float-start" type="submit" [disabled]="!myForm.valid">{{jobDetail ? 'Update' : 'Submit'}}</button>

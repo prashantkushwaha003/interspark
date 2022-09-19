@@ -11,7 +11,7 @@ import { ApiService } from 'src/app/service/api.service';
 export class JobDetailsComponent implements OnInit {
 
   jobDetail:Job = {
-    id: 0,
+    id: '0',
     job_number: '',
     job_title: '',
     job_start_date: null,
